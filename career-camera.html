@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📷 Определение Профессии</title>
+    <link rel="stylesheet" href="career-camera.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>📷 Определение Профессии</h1>
+            <p>Позвольте камере проанализировать вас и определить подходящую профессию</p>
+        </header>
+
+        <div class="camera-section">
+            <div class="camera-container">
+                <video id="video" autoplay playsinline></video>
+                <canvas id="captureCanvas" style="display: none;"></canvas>
+                <div id="overlay" class="overlay">
+                    <div class="scan-line"></div>
+                    <div id="focusFrame" class="focus-frame" style="display: none;"></div>
+                </div>
+            </div>
+            
+            <div class="focus-area-selector" id="focusAreaSelector" style="display: none;">
+                <h4>🎯 Выберите область фокусировки:</h4>
+                <div class="focus-buttons">
+                    <button class="focus-btn active" data-area="full">Вся область</button>
+                    <button class="focus-btn" data-area="face">Лицо</button>
+                    <button class="focus-btn" data-area="upper">Верхняя часть</button>
+                    <button class="focus-btn" data-area="center">Центр</button>
+                    <button class="focus-btn" data-area="left">Левая сторона</button>
+                    <button class="focus-btn" data-area="right">Правая сторона</button>
+                </div>
+            </div>
+            
+            <div class="controls-panel">
+                <button id="startCameraBtn" class="btn btn-primary">Включить камеру</button>
+                <button id="analyzeBtn" class="btn btn-analyze" style="display: none;">Анализировать</button>
+                <button id="retryBtn" class="btn btn-secondary" style="display: none;">Повторить</button>
+            </div>
+            
+            <div id="status" class="status-message"></div>
+        </div>
+
+        <canvas id="confettiCanvas"></canvas>
+
+        <div id="resultSection" class="result-section" style="display: none;">
+            <h2>🎯 Результат анализа</h2>
+            <div class="profession-card">
+                <div class="profession-icon" id="professionIcon">💼</div>
+                <h3 id="professionName">Профессия</h3>
+                <p id="professionDescription" class="profession-description"></p>
+                <div class="profession-skills">
+                    <h4>Необходимые навыки:</h4>
+                    <ul id="professionSkills"></ul>
+                </div>
+                <div class="match-score">
+                    <span>Совпадение: </span>
+                    <span id="matchPercentage">0%</span>
+                </div>
+                <div class="profession-salary" id="professionSalary"></div>
+            </div>
+            
+            <div class="other-professions">
+                <h4>Другие подходящие профессии:</h4>
+                <div id="otherProfessions" class="professions-list"></div>
+            </div>
+            
+            <div class="cafedra-section">
+                <div class="cafedra-card">
+                    <h3>🎓 Рекомендации кафедры КБ9</h3>
+                    <p class="cafedra-intro">
+                        На основе вашей профессии мы рекомендуем следующие дисциплины нашей кафедры:
+                    </p>
+                    <div id="recommendedTopics" class="topics-list"></div>
+                    <div class="cafedra-info">
+                        <h4>Почему стоит выбрать кафедру КБ9?</h4>
+                        <ul class="cafedra-benefits">
+                            <li>✅ Современные программы обучения в области информационных систем</li>
+                            <li>✅ Практико-ориентированный подход с реальными проектами</li>
+                            <li>✅ Опытные преподаватели и актуальные технологии</li>
+                            <li>✅ Широкий спектр дисциплин от программирования до бизнес-анализа</li>
+                            <li>✅ Отличные перспективы трудоустройства</li>
+                        </ul>
+                        <p class="cafedra-cta">
+                            <strong>Присоединяйтесь к кафедре КБ9 и станьте востребованным IT-специалистом!</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>ℹ️ Как это работает:</h3>
+            <p>Система анализирует ваше изображение и определяет профессию на основе различных характеристик. Результаты носят рекомендательный характер.</p>
+            <a href="index.html" class="back-link">← Вернуться на главную</a>
+        </div>
+    </div>
+
+    <script src="topics-data.js"></script>
+    <script src="career-camera.js"></script>
+</body>
+</html>
+

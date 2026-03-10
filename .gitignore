@@ -1,0 +1,11 @@
+node_modules/
+pending-request.json
+last-request.json
+user-request.txt
+NEW_REQUEST.txt
+ai-requests/
+.processed-requests.json
+.env
+*.log
+.DS_Store
+

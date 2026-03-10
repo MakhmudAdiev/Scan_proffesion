@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запросы для Проекта</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Помощник для Проекта</h1>
+            <p>Введите ваш запрос, и он будет выполнен, изменив проект</p>
+            <div class="pets-display">
+                <div class="pet-item mascot-item">
+                    <div class="mascot-container">
+                        <div class="mascot-body">
+                            <div class="mascot-head">😸</div>
+                            <div class="mascot-hat">🎩</div>
+                            <div class="mascot-tie">👔</div>
+                            <div class="mascot-arms">👋</div>
+                        </div>
+                    </div>
+                    <p class="pet-text">Привет! Я маскот - очеловеченный кот! Готов помочь с проектом!</p>
+                </div>
+                <div class="pet-item">
+                    <div class="pet">🐶</div>
+                    <p class="pet-text">А я собака! Меня тоже добавили по запросу!</p>
+                </div>
+                <div class="pet-item">
+                    <div class="pet">🐰</div>
+                    <p class="pet-text">И я кролик! Присоединился к команде маскотов!</p>
+                </div>
+                <div class="pet-item owl-item">
+                    <div class="pet owl">🦉</div>
+                    <div class="owl-animation"></div>
+                    <p class="pet-text">А я сова! Мудрая и наблюдательная!</p>
+                </div>
+            </div>
+        </header>
+        
+        <div class="input-section">
+            <textarea 
+                id="requestInput" 
+                placeholder="Введите ваш запрос здесь... Например: 'Добавь кнопку для очистки формы' или 'Измени цвет фона на синий'"
+                rows="6"
+            ></textarea>
+            
+            <div class="button-group">
+                <button id="sendButton" class="btn btn-primary">
+                    <span class="btn-text">Отправить запрос</span>
+                    <span class="btn-loader" style="display: none;">⏳ Обработка...</span>
+                </button>
+                <button id="clearButton" class="btn btn-secondary">Очистить</button>
+            </div>
+        </div>
+        
+        <div class="response-section" id="responseSection" style="display: none;">
+            <h3>Статус запроса:</h3>
+            <div id="responseContent" class="response-content"></div>
+            <div id="instructionBox" class="instruction-box" style="display: none;">
+                <strong>✅ Автоматическая обработка:</strong>
+                <p>Запрос отправлен и будет автоматически обработан. Ожидайте выполнения...</p>
+                <p style="font-size: 0.9em; color: #666; margin-top: 10px;">
+                    Запрос будет автоматически прочитан и выполнен без дополнительных команд.
+                </p>
+            </div>
+        </div>
+        
+        <div class="history-section">
+            <h3>История запросов:</h3>
+            <div id="historyList" class="history-list"></div>
+        </div>
+        
+        <div class="game-section">
+            <a href="games-menu.html" class="game-link">
+                🎮 Выбрать игру - Тетрис, Змейка, Breakout, Space Invaders, Pong
+            </a>
+            <a href="career-camera.html" class="game-link" style="margin-top: 15px;">
+                📷 Определение Профессии - Узнайте какая профессия вам подходит
+            </a>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
+
