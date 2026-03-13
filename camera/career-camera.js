@@ -1172,6 +1172,20 @@ function getRecommendedTopics(profession) {
     return { topics: recommended, profile: profileData };
 }
 
+/** Извлекает число часов из строки вида "16 часов (8 пар)" или "32 часа (16 пар)" */
+function parseHours(str) {
+    if (!str || typeof str !== 'string') return 0;
+    const m = str.match(/(\d+)\s*(?:час|часов|часа)/);
+    return m ? parseInt(m[1], 10) : 0;
+}
+
+/** Форматирует курс: ["2","3"] -> "2–3 курс", ["2"] -> "2 курс" */
+function formatCourse(course) {
+    if (!course || course.length === 0) return '';
+    if (course.length === 1) return `${course[0]} курс`;
+    return `${course[0]}–${course[course.length - 1]} курс`;
+}
+
 // Отображение рекомендованных дисциплин
 function displayRecommendedTopics(profession) {
     const result = getRecommendedTopics(profession);
@@ -1183,7 +1197,6 @@ function displayRecommendedTopics(profession) {
     
     topicsListEl.innerHTML = '';
     
-    // Добавляем информацию о рекомендованном профиле
     const profileInfo = document.createElement('div');
     profileInfo.className = 'profile-info';
     profileInfo.innerHTML = `
@@ -1206,21 +1219,54 @@ function displayRecommendedTopics(profession) {
         const card = document.createElement('div');
         card.className = 'topic-card';
         
-        const details = [];
-        if (topic.creditUnit) details.push(`<div><strong>З.е.:</strong> ${topic.creditUnit}</div>`);
-        if (topic.lecture) details.push(`<div><strong>Лекции:</strong> ${topic.lecture}</div>`);
-        if (topic.practice) details.push(`<div><strong>Практика:</strong> ${topic.practice}</div>`);
-        if (topic.exam) details.push(`<div><strong>Экзамен:</strong> ${topic.exam}</div>`);
-        if (topic.test) details.push(`<div><strong>Зачет:</strong> ${topic.test}</div>`);
-        if (topic.course && topic.course.length > 0) {
-            details.push(`<div><strong>Курс:</strong> ${topic.course.join(', ')}</div>`);
+        const creditUnit = topic.creditUnit || '';
+        const courseStr = formatCourse(topic.course);
+        const headerLine = [creditUnit, courseStr].filter(Boolean).join('  |  ');
+        
+        const lecH = parseHours(topic.lecture);
+        const prH = parseHours(topic.practice);
+        const totalH = lecH + prH;
+        const lecPct = totalH > 0 ? (lecH / totalH) * 100 : 0;
+        const prPct = totalH > 0 ? (prH / totalH) * 100 : 0;
+        
+        let loadHtml = '';
+        if (totalH > 0) {
+            loadHtml = `
+                <div class="topic-legend-row">
+                    <span class="topic-legend-item topic-legend-lecture"><span class="topic-legend-swatch"></span>Лекции</span>
+                    <span class="topic-legend-item topic-legend-practice"><span class="topic-legend-swatch"></span>Практика</span>
+                    <span class="topic-legend-total">Всего ${totalH} ч</span>
+                </div>
+                <div class="topic-load-bar">
+                    <span class="topic-load-seg topic-load-lecture" style="width:${lecPct}%">${lecH > 0 ? lecH + ' ч' : ''}</span>
+                    <span class="topic-load-seg topic-load-practice" style="width:${prPct}%">${prH > 0 ? prH + ' ч' : ''}</span>
+                </div>
+            `;
         }
+        
+        const attestRows = [];
+        if (topic.test) attestRows.push(`<div class="topic-attest-row"><span class="topic-attest-type">Зачёт</span><span class="topic-attest-term">${topic.test}</span></div>`);
+        if (topic.exam) attestRows.push(`<div class="topic-attest-row"><span class="topic-attest-type">Экзамен</span><span class="topic-attest-term">${topic.exam}</span></div>`);
+        
+        const attestSection = attestRows.length > 0
+            ? `<div class="topic-section topic-section-attest">
+                <div class="topic-section-title"><span class="topic-section-line"></span><span class="topic-section-text">Аттестация</span><span class="topic-section-line"></span></div>
+                <div class="topic-attest">${attestRows.join('')}</div>
+               </div>`
+            : '';
+        
+        const loadSection = totalH > 0
+            ? `<div class="topic-section topic-section-load">
+                <div class="topic-section-title"><span class="topic-section-line"></span><span class="topic-section-text">Нагрузка</span><span class="topic-section-line"></span></div>
+                <div class="topic-load">${loadHtml}</div>
+               </div>`
+            : '';
         
         card.innerHTML = `
             <div class="topic-title">${topic.title}</div>
-            <div class="topic-details">
-                ${details.join('')}
-            </div>
+            <div class="topic-meta">${headerLine}</div>
+            ${loadSection}
+            ${attestSection}
         `;
         
         topicsListEl.appendChild(card);

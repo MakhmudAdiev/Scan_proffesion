@@ -723,22 +723,141 @@ body {
 .topic-title {
     font-size: 1.2em;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #ffd700;
 }
 
-.topic-details {
+.topic-meta {
+    font-size: 0.95em;
+    opacity: 0.95;
+    margin-bottom: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.topic-section {
+    margin-bottom: 12px;
+}
+
+.topic-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+}
+
+.topic-section-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.topic-section-text {
+    flex-shrink: 0;
+}
+
+.topic-load {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     font-size: 0.9em;
-    opacity: 0.9;
-    line-height: 1.6;
 }
 
-.topic-details div {
-    margin: 5px 0;
+.topic-legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
 }
 
-.topic-details strong {
+.topic-legend-total {
+    margin-left: auto;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+.topic-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.topic-legend-swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+}
+
+.topic-legend-item.topic-legend-lecture .topic-legend-swatch {
+    background: #4ECDC4;
+}
+
+.topic-legend-item.topic-legend-lecture {
     color: #4ECDC4;
+}
+
+.topic-legend-item.topic-legend-practice .topic-legend-swatch {
+    background: #ffd700;
+}
+
+.topic-legend-item.topic-legend-practice {
+    color: #ffd700;
+}
+
+.topic-load-bar {
+    display: flex;
+    width: 100%;
+    min-height: 24px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.topic-load-seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 0 6px;
+    font-size: 0.85em;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.7);
+    transition: width 0.3s;
+}
+
+.topic-load-lecture {
+    background: #4ECDC4;
+}
+
+.topic-load-practice {
+    background: #ffd700;
+}
+
+.topic-attest {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.topic-attest-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+}
+
+.topic-attest-type {
+    color: #4ECDC4;
+}
+
+.topic-attest-term {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Информация о профиле */
