@@ -282,8 +282,11 @@ function getProfessionType(profession) {
 }
 
 let stream = null;
-let selectedFocusArea = 'full'; // По умолчанию - вся область
-let currentResult = null; // Сохраняем текущий результат для переключения профессий
+let currentResult = null;
+let scannerAnimationId = null;
+let scanY = 0;
+let offscreenCanvas = null;
+let offscreenCtx = null;
 
 // Включение камеры
 startCameraBtn.addEventListener('click', async () => {
@@ -298,12 +301,10 @@ startCameraBtn.addEventListener('click', async () => {
         video.srcObject = stream;
         startCameraBtn.style.display = 'none';
         analyzeBtn.style.display = 'inline-block';
-        document.getElementById('focusAreaSelector').style.display = 'block';
-        statusEl.textContent = 'Камера активирована! Выберите область фокусировки и нажмите "Анализировать".';
+        document.getElementById('scanLine').style.display = 'block';
+        statusEl.textContent = 'Камера активирована! Нажмите "Анализировать", чтобы выполнить сканирование.';
         statusEl.className = 'status-message success';
-        
-        // Обновляем визуальную индикацию области фокусировки
-        updateFocusFrame();
+        startContourScanner();
     } catch (error) {
         statusEl.textContent = 'Ошибка доступа к камере: ' + error.message;
         statusEl.className = 'status-message error';
@@ -320,7 +321,7 @@ analyzeBtn.addEventListener('click', () => {
     
     statusEl.textContent = 'Фиксация кадра...';
     statusEl.className = 'status-message info';
-    document.getElementById('focusAreaSelector').style.display = 'none';
+    stopContourScanner();
     
     // Захватываем кадр с видео перед остановкой камеры
     captureCanvas.width = video.videoWidth;
@@ -340,20 +341,31 @@ analyzeBtn.addEventListener('click', () => {
     captureCanvas.style.display = 'block';
     captureCanvas.style.width = '100%';
     captureCanvas.style.height = 'auto';
-    captureCanvas.style.transform = 'scaleX(-1)'; // Зеркальное отображение как у видео
+    captureCanvas.style.transform = 'scaleX(-1)';
     
-    // Скрываем overlay с рамкой фокусировки
-    document.getElementById('overlay').style.display = 'none';
+    // Контур и скан-линия остаются над кадром
+    const contourCanvas = document.getElementById('contourCanvas');
+    const scanLineEl = document.getElementById('scanLine');
+    contourCanvas.width = captureCanvas.width;
+    contourCanvas.height = captureCanvas.height;
+    contourCanvas.style.display = 'block';
+    scanLineEl.style.display = 'block';
     
-    statusEl.textContent = 'Анализ изображения...';
+    statusEl.textContent = 'Сканирование...';
     
-    // Анализируем зафиксированное изображение
-    setTimeout(() => {
+    const imgData = ctx.getImageData(0, 0, captureCanvas.width, captureCanvas.height);
+    const edgePixels = getEdgePixels(imgData.data, captureCanvas.width, captureCanvas.height);
+    
+    runCaptureScan(edgePixels, captureCanvas.width, captureCanvas.height, () => {
+        document.getElementById('overlay').style.display = 'none';
+        scanLineEl.style.display = 'none';
+        contourCanvas.style.display = 'none';
+        statusEl.textContent = 'Анализ изображения...';
         const result = analyzeImage(captureCanvas);
         displayResult(result);
         analyzeBtn.style.display = 'none';
         retryBtn.style.display = 'inline-block';
-    }, 2000);
+    });
 });
 
 // Повторный анализ
@@ -362,8 +374,10 @@ retryBtn.addEventListener('click', async () => {
     analyzeBtn.style.display = 'none';
     retryBtn.style.display = 'none';
     
-    // Скрываем зафиксированный кадр
+    // Скрываем кадр и контур
     captureCanvas.style.display = 'none';
+    const contourEl = document.getElementById('contourCanvas');
+    if (contourEl) contourEl.style.display = 'none';
     
     statusEl.textContent = 'Включение камеры...';
     statusEl.className = 'status-message info';
@@ -384,12 +398,10 @@ retryBtn.addEventListener('click', async () => {
         document.getElementById('overlay').style.display = 'block';
         
         analyzeBtn.style.display = 'inline-block';
-        document.getElementById('focusAreaSelector').style.display = 'block';
-        statusEl.textContent = 'Камера активирована! Выберите область фокусировки и нажмите "Анализировать".';
+        document.getElementById('scanLine').style.display = 'block';
+        statusEl.textContent = 'Камера активирована! Нажмите "Анализировать", чтобы выполнить сканирование.';
         statusEl.className = 'status-message success';
-        
-        // Обновляем визуальную индикацию области фокусировки
-        updateFocusFrame();
+        startContourScanner();
     } catch (error) {
         statusEl.textContent = 'Ошибка доступа к камере: ' + error.message;
         statusEl.className = 'status-message error';
@@ -397,158 +409,169 @@ retryBtn.addEventListener('click', async () => {
     }
 });
 
-// Инициализация обработчиков выбора области фокусировки
-function initFocusAreaSelector() {
-    const focusButtons = document.querySelectorAll('.focus-btn');
-    focusButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Убираем активный класс со всех кнопок
-            focusButtons.forEach(b => b.classList.remove('active'));
-            // Добавляем активный класс к выбранной кнопке
-            btn.classList.add('active');
-            // Сохраняем выбранную область
-            selectedFocusArea = btn.dataset.area;
-            // Обновляем визуальную индикацию
-            updateFocusFrame();
-        });
-    });
+// Сканер по контуру в реальном времени (без ИИ)
+const sobelX = [-1, 0, 1, -2, 0, 2, -1, 0, 1];
+const sobelY = [-1, -2, -1, 0, 0, 0, 1, 2, 1];
+const EDGE_STEP = 2;
+const EDGE_THRESHOLD = 70;
+const SCAN_BAND = 35;
+const SCAN_SPEED = 2;
+const CAPTURE_SCAN_SPEED = 8;
+
+function getEdgePixels(data, w, h) {
+    const edgePixels = [];
+    for (let y = 1; y < h - 1; y += EDGE_STEP) {
+        for (let x = 1; x < w - 1; x += EDGE_STEP) {
+            let gx = 0, gy = 0;
+            for (let ky = -1; ky <= 1; ky++) {
+                for (let kx = -1; kx <= 1; kx++) {
+                    const i = ((y + ky) * w + (x + kx)) * 4;
+                    const gray = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                    const idx = (ky + 1) * 3 + (kx + 1);
+                    gx += gray * sobelX[idx];
+                    gy += gray * sobelY[idx];
+                }
+            }
+            const mag = Math.sqrt(gx * gx + gy * gy);
+            if (mag > EDGE_THRESHOLD) edgePixels.push({ x, y });
+        }
+    }
+    return edgePixels;
 }
 
-// Инициализируем при загрузке страницы
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initFocusAreaSelector);
-} else {
-    initFocusAreaSelector();
-}
-
-// Функция для обновления визуальной рамки области фокусировки
-function updateFocusFrame() {
-    const video = document.getElementById('video');
-    const focusFrame = document.getElementById('focusFrame');
-    
-    if (!video.videoWidth || !video.videoHeight) {
-        // Если видео еще не загружено, ждем
-        setTimeout(updateFocusFrame, 100);
+function contourScannerLoop() {
+    if (!stream || !video.videoWidth) {
+        scannerAnimationId = requestAnimationFrame(contourScannerLoop);
         return;
     }
     
-    const videoRect = video.getBoundingClientRect();
-    const videoAspect = video.videoWidth / video.videoHeight;
-    const displayAspect = videoRect.width / videoRect.height;
+    const w = video.videoWidth;
+    const h = video.videoHeight;
+    const contourCanvas = document.getElementById('contourCanvas');
+    const scanLineEl = document.getElementById('scanLine');
     
-    let frameWidth, frameHeight, frameLeft, frameTop;
+    if (!offscreenCanvas || offscreenCanvas.width !== w) {
+        offscreenCanvas = document.createElement('canvas');
+        offscreenCanvas.width = w;
+        offscreenCanvas.height = h;
+        offscreenCtx = offscreenCanvas.getContext('2d');
+    }
+    if (!contourCanvas) return;
     
-    switch(selectedFocusArea) {
-        case 'full':
-            focusFrame.style.display = 'none';
-            return;
-        case 'face':
-            // Верхняя центральная часть (лицо)
-            frameWidth = videoRect.width * 0.5;
-            frameHeight = videoRect.height * 0.4;
-            frameLeft = (videoRect.width - frameWidth) / 2;
-            frameTop = videoRect.height * 0.1;
-            break;
-        case 'upper':
-            // Верхняя половина
-            frameWidth = videoRect.width * 0.8;
-            frameHeight = videoRect.height * 0.5;
-            frameLeft = (videoRect.width - frameWidth) / 2;
-            frameTop = videoRect.height * 0.05;
-            break;
-        case 'center':
-            // Центральная область
-            frameWidth = videoRect.width * 0.6;
-            frameHeight = videoRect.height * 0.6;
-            frameLeft = (videoRect.width - frameWidth) / 2;
-            frameTop = (videoRect.height - frameHeight) / 2;
-            break;
-        case 'left':
-            // Левая половина
-            frameWidth = videoRect.width * 0.5;
-            frameHeight = videoRect.height * 0.7;
-            frameLeft = videoRect.width * 0.05;
-            frameTop = (videoRect.height - frameHeight) / 2;
-            break;
-        case 'right':
-            // Правая половина
-            frameWidth = videoRect.width * 0.5;
-            frameHeight = videoRect.height * 0.7;
-            frameLeft = videoRect.width * 0.45;
-            frameTop = (videoRect.height - frameHeight) / 2;
-            break;
-        default:
-            focusFrame.style.display = 'none';
-            return;
+    contourCanvas.width = w;
+    contourCanvas.height = h;
+    contourCanvas.style.display = 'block';
+    
+    offscreenCtx.drawImage(video, 0, 0);
+    const imgData = offscreenCtx.getImageData(0, 0, w, h);
+    const edgePixels = getEdgePixels(imgData.data, w, h);
+    
+    scanY = (scanY + SCAN_SPEED) % (h + 80);
+    const scanCenter = scanY - 40;
+    
+    const ctx = contourCanvas.getContext('2d');
+    ctx.clearRect(0, 0, w, h);
+    
+    const pixelSize = Math.max(1.5, Math.min(3, w / 240));
+    
+    edgePixels.forEach(p => {
+        const d = Math.abs(p.y - scanCenter);
+        let alpha = 0;
+        if (d < SCAN_BAND) {
+            alpha = 1 - d / SCAN_BAND;
+            alpha = 0.3 + alpha * 0.7;
+        }
+        if (alpha > 0) {
+            ctx.shadowColor = '#00ff88';
+            ctx.shadowBlur = 8;
+            ctx.fillStyle = `rgba(0, 255, 136, ${alpha})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, pixelSize, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    });
+    ctx.shadowBlur = 0;
+    
+    if (scanLineEl) {
+        scanLineEl.style.top = (scanCenter / h * 100) + '%';
     }
     
-    focusFrame.style.display = 'block';
-    focusFrame.style.width = frameWidth + 'px';
-    focusFrame.style.height = frameHeight + 'px';
-    focusFrame.style.left = frameLeft + 'px';
-    focusFrame.style.top = frameTop + 'px';
+    scannerAnimationId = requestAnimationFrame(contourScannerLoop);
 }
 
-// Обновляем рамку при изменении размера окна
-window.addEventListener('resize', () => {
-    if (stream) {
-        updateFocusFrame();
-    }
-});
+function startContourScanner() {
+    scanY = 0;
+    if (scannerAnimationId) cancelAnimationFrame(scannerAnimationId);
+    scannerAnimationId = requestAnimationFrame(contourScannerLoop);
+}
 
-// Обновляем рамку при загрузке метаданных видео
-const videoEl = document.getElementById('video');
-if (videoEl) {
-    videoEl.addEventListener('loadedmetadata', updateFocusFrame);
+function stopContourScanner() {
+    if (scannerAnimationId) {
+        cancelAnimationFrame(scannerAnimationId);
+        scannerAnimationId = null;
+    }
+}
+
+// Один проход сканера по зафиксированному кадру (быстрее)
+function runCaptureScan(edgePixels, w, h, onComplete) {
+    const contourCanvas = document.getElementById('contourCanvas');
+    const scanLineEl = document.getElementById('scanLine');
+    if (!contourCanvas || !scanLineEl) {
+        onComplete();
+        return;
+    }
+    
+    let captureScanY = -SCAN_BAND;
+    
+    function frame() {
+        captureScanY += CAPTURE_SCAN_SPEED;
+        const scanCenter = captureScanY;
+        
+        const ctx = contourCanvas.getContext('2d');
+        ctx.clearRect(0, 0, w, h);
+        
+        const pixelSize = Math.max(1.5, Math.min(3, w / 240));
+        
+        edgePixels.forEach(p => {
+            const d = Math.abs(p.y - scanCenter);
+            let alpha = 0;
+            if (d < SCAN_BAND) {
+                alpha = 1 - d / SCAN_BAND;
+                alpha = 0.3 + alpha * 0.7;
+            }
+            if (alpha > 0) {
+                ctx.shadowColor = '#00ff88';
+                ctx.shadowBlur = 8;
+                ctx.fillStyle = `rgba(0, 255, 136, ${alpha})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, pixelSize, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        });
+        ctx.shadowBlur = 0;
+        
+        scanLineEl.style.top = (scanCenter / h * 100) + '%';
+        
+        if (captureScanY < h + SCAN_BAND) {
+            requestAnimationFrame(frame);
+        } else {
+            onComplete();
+        }
+    }
+    
+    requestAnimationFrame(frame);
 }
 
 // Анализ изображения - извлечение характеристик
 function analyzeImage(canvas) {
     const ctx = canvas.getContext('2d');
     
-    // Определяем область для анализа на основе выбранной фокусировки
-    let x = 0, y = 0, width = canvas.width, height = canvas.height;
+    // Анализируем автоматически центральную область кадра (там обычно находится человек)
+    const width = canvas.width * 0.6;
+    const height = canvas.height * 0.7;
+    const x = (canvas.width - width) / 2;
+    const y = (canvas.height - height) / 2.5;
     
-    switch(selectedFocusArea) {
-        case 'face':
-            // Верхняя центральная часть (лицо)
-            width = canvas.width * 0.5;
-            height = canvas.height * 0.4;
-            x = (canvas.width - width) / 2;
-            y = canvas.height * 0.1;
-            break;
-        case 'upper':
-            // Верхняя половина
-            width = canvas.width * 0.8;
-            height = canvas.height * 0.5;
-            x = (canvas.width - width) / 2;
-            y = canvas.height * 0.05;
-            break;
-        case 'center':
-            // Центральная область
-            width = canvas.width * 0.6;
-            height = canvas.height * 0.6;
-            x = (canvas.width - width) / 2;
-            y = (canvas.height - height) / 2;
-            break;
-        case 'left':
-            // Левая половина
-            width = canvas.width * 0.5;
-            height = canvas.height * 0.7;
-            x = canvas.width * 0.05;
-            y = (canvas.height - height) / 2;
-            break;
-        case 'right':
-            // Правая половина
-            width = canvas.width * 0.5;
-            height = canvas.height * 0.7;
-            x = canvas.width * 0.45;
-            y = (canvas.height - height) / 2;
-            break;
-        // case 'full' - используем весь canvas (x=0, y=0, width, height уже установлены)
-    }
-    
-    // Получаем данные только из выбранной области
     const imageData = ctx.getImageData(x, y, width, height);
     const data = imageData.data; // Массив RGBA: [R, G, B, A, R, G, B, A, ...]
     
@@ -736,10 +759,6 @@ function determineProfession(brightness, colorVariance, contrast) {
             score += 25; // Работа с виртуальными пространствами
         }
         
-        // Случайный фактор для разнообразия результатов (0-30 баллов)
-        // Это делает результаты более интересными и непредсказуемыми
-        score += Math.random() * 30;
-        
         return { profession: prof, score: score };
     });
     
@@ -756,33 +775,9 @@ function determineProfession(brightness, colorVariance, contrast) {
     const mainProf = scores[0].profession;
     const mainProfType = getProfessionType(mainProf);
     
-    // Выбираем разнообразные профессии
-    const selectedOthers = [];
-    const usedTypes = new Set([mainProfType]);
+    // Берем следующие по рейтингу профессии (без случайности)
     const allScores = scores.slice(1);
-    
-    // Сначала пытаемся выбрать профессии разных типов
-    for (const scoreItem of allScores) {
-        if (selectedOthers.length >= 3) break;
-        const profType = getProfessionType(scoreItem.profession);
-        // Приоритет профессиям другого типа, но не исключаем полностью профессии того же типа
-        if (!usedTypes.has(profType) || (selectedOthers.length < 2 && Math.random() > 0.4)) {
-            selectedOthers.push(scoreItem);
-            usedTypes.add(profType);
-        }
-    }
-    
-    // Если не набрали 3, добавляем оставшиеся по рейтингу
-    if (selectedOthers.length < 3) {
-        for (const scoreItem of allScores) {
-            if (selectedOthers.length >= 3) break;
-            if (!selectedOthers.find(o => o.profession.name === scoreItem.profession.name)) {
-                selectedOthers.push(scoreItem);
-            }
-        }
-    }
-    
-    const others = selectedOthers.slice(0, 3).map(s => ({
+    const others = allScores.slice(0, 3).map(s => ({
         profession: s.profession,
         match: Math.min(90, Math.max(50, Math.round(s.score)))
     }));

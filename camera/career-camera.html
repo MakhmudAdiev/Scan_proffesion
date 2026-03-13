@@ -17,21 +17,9 @@
             <div class="camera-container">
                 <video id="video" autoplay playsinline></video>
                 <canvas id="captureCanvas" style="display: none;"></canvas>
+                <canvas id="contourCanvas" class="contour-overlay"></canvas>
                 <div id="overlay" class="overlay">
-                    <div class="scan-line"></div>
-                    <div id="focusFrame" class="focus-frame" style="display: none;"></div>
-                </div>
-            </div>
-            
-            <div class="focus-area-selector" id="focusAreaSelector" style="display: none;">
-                <h4>🎯 Выберите область фокусировки:</h4>
-                <div class="focus-buttons">
-                    <button class="focus-btn active" data-area="full">Вся область</button>
-                    <button class="focus-btn" data-area="face">Лицо</button>
-                    <button class="focus-btn" data-area="upper">Верхняя часть</button>
-                    <button class="focus-btn" data-area="center">Центр</button>
-                    <button class="focus-btn" data-area="left">Левая сторона</button>
-                    <button class="focus-btn" data-area="right">Правая сторона</button>
+                    <div id="scanLine" class="scan-line" style="display: none;"></div>
                 </div>
             </div>
             
