@@ -373,6 +373,7 @@ retryBtn.addEventListener('click', async () => {
     resultSection.style.display = 'none';
     analyzeBtn.style.display = 'none';
     retryBtn.style.display = 'none';
+    hideTechProgressBar();
     
     // Скрываем кадр и контур
     captureCanvas.style.display = 'none';
@@ -860,192 +861,61 @@ function displayResult(result, selectedProfession = null) {
         otherProfessionsEl.appendChild(div);
     });
     
-    resultSection.style.display = 'block';
+    resultSection.style.display = 'none';
     statusEl.textContent = 'Анализ завершен!';
     statusEl.className = 'status-message success';
     
-    // Показываем эффект поздравления
-    showCelebration(mainProf, matchPercent);
+    // Показываем техно-прогресс-бар, результат — только после завершения
+    showTechProgressBar(() => {
+        const wrap = document.getElementById('techProgressWrap');
+        if (wrap) wrap.style.display = 'none';
+        resultSection.style.display = 'block';
+    });
     
     // Отображаем рекомендованные дисциплины
     displayRecommendedTopics(mainProf);
 }
 
-// Функция для показа эффекта поздравления
-function showCelebration(profession, matchPercent) {
-    // Просто запускаем конфетти без попапа
-    startConfetti();
+// Функция для показа техно-прогресс-бара после сканирования. onComplete вызывается после завершения.
+function showTechProgressBar(onComplete) {
+    const wrap = document.getElementById('techProgressWrap');
+    const bar = document.getElementById('techProgressBar');
+    const label = document.getElementById('techProgressLabel');
+    if (!wrap || !bar || !label) return;
     
-    // Останавливаем конфетти через 5 секунд
-    setTimeout(() => {
-        stopConfetti();
-    }, 5000);
-}
-
-// Конфетти
-let confettiParticles = [];
-let confettiAnimationId = null;
-const confettiCanvas = document.getElementById('confettiCanvas');
-
-function initConfetti() {
-    if (!confettiCanvas) return;
+    wrap.style.display = 'block';
+    bar.style.width = '0%';
+    label.textContent = '0%';
     
-    confettiCanvas.width = window.innerWidth;
-    confettiCanvas.height = window.innerHeight;
-    confettiCanvas.style.position = 'fixed';
-    confettiCanvas.style.top = '0';
-    confettiCanvas.style.left = '0';
-    confettiCanvas.style.pointerEvents = 'none';
-    confettiCanvas.style.zIndex = '9999';
-}
-
-function startConfetti() {
-    if (!confettiCanvas) return;
+    const duration = 1800;
+    const start = performance.now();
     
-    initConfetti();
-    confettiParticles = [];
-    
-    // Создаем больше частиц конфетти для красивого эффекта
-    const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff6b6b', '#4ECDC4', '#ffd700', '#ff9500', '#9d4edd', '#06ffa5'];
-    
-    // Создаем волны конфетти из разных точек
-    const centerX = confettiCanvas.width / 2;
-    const centerY = confettiCanvas.height / 2;
-    
-    // Первая волна из центра вверх
-    for (let i = 0; i < 100; i++) {
-        const angle = (Math.PI * 2 * i) / 100;
-        const distance = Math.random() * 50;
-        confettiParticles.push({
-            x: centerX + Math.cos(angle) * distance,
-            y: centerY - 100 + Math.sin(angle) * distance,
-            vx: (Math.random() - 0.5) * 3,
-            vy: Math.random() * 4 + 3,
-            color: colors[Math.floor(Math.random() * colors.length)],
-            size: Math.random() * 10 + 5,
-            rotation: Math.random() * Math.PI * 2,
-            rotationSpeed: (Math.random() - 0.5) * 0.3,
-            shape: Math.random() > 0.5 ? 'circle' : 'square'
-        });
-    }
-    
-    // Вторая волна сверху экрана
-    for (let i = 0; i < 80; i++) {
-        confettiParticles.push({
-            x: Math.random() * confettiCanvas.width,
-            y: -10 - Math.random() * 50,
-            vx: (Math.random() - 0.5) * 2.5,
-            vy: Math.random() * 3 + 2,
-            color: colors[Math.floor(Math.random() * colors.length)],
-            size: Math.random() * 8 + 4,
-            rotation: Math.random() * Math.PI * 2,
-            rotationSpeed: (Math.random() - 0.5) * 0.2,
-            shape: Math.random() > 0.5 ? 'circle' : 'square'
-        });
-    }
-    
-    // Третья волна из верхних углов
-    for (let i = 0; i < 50; i++) {
-        const startX = Math.random() > 0.5 ? 0 : confettiCanvas.width;
-        confettiParticles.push({
-            x: startX,
-            y: -10 - Math.random() * 30,
-            vx: (Math.random() - 0.5) * 3,
-            vy: Math.random() * 4 + 2,
-            color: colors[Math.floor(Math.random() * colors.length)],
-            size: Math.random() * 9 + 5,
-            rotation: Math.random() * Math.PI * 2,
-            rotationSpeed: (Math.random() - 0.5) * 0.25,
-            shape: Math.random() > 0.5 ? 'circle' : 'square'
-        });
-    }
-    
-    animateConfetti();
-}
-
-function animateConfetti() {
-    if (!confettiCanvas || confettiParticles.length === 0) return;
-    
-    const ctx = confettiCanvas.getContext('2d');
-    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-    
-    confettiParticles = confettiParticles.filter(particle => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-        particle.vy += 0.15; // Гравитация
-        particle.vx *= 0.99; // Сопротивление воздуха
-        particle.rotation += particle.rotationSpeed;
+    function step(timestamp) {
+        const elapsed = timestamp - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 1.5); // ease-out
+        const pct = Math.round(eased * 100);
         
-        // Рисуем частицу с тенью для объема
-        ctx.save();
-        ctx.translate(particle.x, particle.y);
-        ctx.rotate(particle.rotation);
+        bar.style.width = pct + '%';
+        label.textContent = pct + '%';
         
-        // Тень
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = particle.color;
-        ctx.shadowOffsetX = 2;
-        ctx.shadowOffsetY = 2;
-        
-        ctx.fillStyle = particle.color;
-        
-        if (particle.shape === 'circle') {
-            ctx.beginPath();
-            ctx.arc(0, 0, particle.size / 2, 0, Math.PI * 2);
-            ctx.fill();
-            // Обводка для объема
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-            ctx.lineWidth = 1;
-            ctx.stroke();
+        if (progress < 1) {
+            requestAnimationFrame(step);
         } else {
-            ctx.fillRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size);
-            // Обводка для объема
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-            ctx.lineWidth = 1;
-            ctx.strokeRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size);
+            label.textContent = '100%';
+            setTimeout(() => {
+                if (typeof onComplete === 'function') onComplete();
+            }, 800);
         }
-        
-        ctx.restore();
-        
-        // Удаляем частицы, которые упали за экран
-        return particle.y < confettiCanvas.height + 50;
-    });
+    }
     
-    if (confettiParticles.length > 0) {
-        confettiAnimationId = requestAnimationFrame(animateConfetti);
-    }
+    requestAnimationFrame(step);
 }
 
-function stopConfetti() {
-    if (confettiAnimationId) {
-        cancelAnimationFrame(confettiAnimationId);
-        confettiAnimationId = null;
-    }
-    confettiParticles = [];
-    if (confettiCanvas) {
-        const ctx = confettiCanvas.getContext('2d');
-        ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-    }
-}
-
-// Обновляем размер canvas при изменении размера окна
-window.addEventListener('resize', () => {
-    if (confettiCanvas) {
-        initConfetti();
-    }
-});
-
-// Инициализация конфетти при загрузке
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        if (confettiCanvas) {
-            initConfetti();
-        }
-    });
-} else {
-    if (confettiCanvas) {
-        initConfetti();
-    }
+// Скрыть прогресс-бар при повторе
+function hideTechProgressBar() {
+    const wrap = document.getElementById('techProgressWrap');
+    if (wrap) wrap.style.display = 'none';
 }
 
 // Функция для определения профиля на основе профессии
