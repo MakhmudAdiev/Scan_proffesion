@@ -5,20 +5,21 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #e8eaed;
     min-height: 100vh;
     padding: 20px;
-    color: #333;
+    color: #2d3748;
 }
 
 .app-container {
     max-width: 900px;
     margin: 0 auto;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     padding: 40px;
+    border: 1px solid #e2e8f0;
     animation: fadeIn 0.5s ease-in;
 }
 
@@ -40,12 +41,13 @@ body {
 
 .app-header h1 {
     font-size: 2.5em;
-    color: #667eea;
+    color: #1a365d;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .app-header p {
-    color: #666;
+    color: #4a5568;
     font-size: 1.1em;
 }
 
@@ -58,10 +60,9 @@ body {
     width: 100%;
     max-width: 640px;
     margin: 0 auto 20px;
-    border-radius: 15px;
+    border-radius: 4px;
     overflow: hidden;
-    border: 4px solid rgba(102, 126, 234, 0.3);
-    box-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
+    border: 2px solid #cbd5e0;
     background: #000;
 }
 
@@ -99,13 +100,14 @@ body {
     pointer-events: none;
 }
 
+/* Скан-линия — техно-акцент (бирюзовый) */
 .scan-line {
     position: absolute;
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, transparent, #00ff88, #4ECDC4, #00ff88, transparent);
-    box-shadow: 0 0 15px #00ff88;
+    background: linear-gradient(90deg, transparent, #00b5ad, transparent);
+    box-shadow: 0 0 12px rgba(0, 181, 173, 0.8);
     transition: top 0.05s linear;
 }
 
@@ -122,16 +124,16 @@ body {
 
 /* Селектор области фокусировки */
 .focus-area-selector {
-    background: rgba(102, 126, 234, 0.1);
-    border-radius: 15px;
+    background: #f7fafc;
+    border-radius: 4px;
     padding: 20px;
     margin-bottom: 20px;
-    border: 2px solid rgba(102, 126, 234, 0.2);
+    border: 1px solid #e2e8f0;
 }
 
 .focus-area-selector h4 {
     text-align: center;
-    color: #667eea;
+    color: #1a365d;
     margin-bottom: 15px;
     font-size: 1.1em;
 }
@@ -145,55 +147,39 @@ body {
 
 .focus-btn {
     padding: 10px 20px;
-    border: 2px solid #667eea;
-    border-radius: 8px;
+    border: 1px solid #2c5282;
+    border-radius: 4px;
     background: white;
-    color: #667eea;
+    color: #2c5282;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.2s;
 }
 
 .focus-btn:hover {
-    background: rgba(102, 126, 234, 0.1);
-    transform: translateY(-2px);
+    background: #edf2f7;
 }
 
 .focus-btn.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #1a365d;
     color: white;
-    border-color: #667eea;
-    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+    border-color: #1a365d;
 }
 
-/* Визуальная рамка области фокусировки */
+/* Визуальная рамка области фокусировки — техно-акцент */
 .focus-frame {
     position: absolute;
-    border: 3px solid #4ECDC4;
-    border-radius: 10px;
-    box-shadow: 
-        0 0 0 2px rgba(78, 205, 196, 0.3),
-        0 0 20px rgba(78, 205, 196, 0.5),
-        inset 0 0 20px rgba(78, 205, 196, 0.2);
+    border: 2px solid #00b5ad;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px rgba(0, 181, 173, 0.5);
     pointer-events: none;
     z-index: 10;
-    animation: focusPulse 2s ease-in-out infinite;
 }
 
 @keyframes focusPulse {
-    0%, 100% {
-        box-shadow: 
-            0 0 0 2px rgba(78, 205, 196, 0.3),
-            0 0 20px rgba(78, 205, 196, 0.5),
-            inset 0 0 20px rgba(78, 205, 196, 0.2);
-    }
-    50% {
-        box-shadow: 
-            0 0 0 2px rgba(78, 205, 196, 0.6),
-            0 0 30px rgba(78, 205, 196, 0.8),
-            inset 0 0 30px rgba(78, 205, 196, 0.4);
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
 }
 
 .controls-panel {
@@ -207,7 +193,7 @@ body {
 .btn {
     padding: 15px 30px;
     border: none;
-    border-radius: 10px;
+    border-radius: 4px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -215,28 +201,26 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #2c5282;
     color: white;
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    background: #2b6cb0;
 }
 
 .btn-analyze {
-    background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+    background: #1a365d;
     color: white;
 }
 
 .btn-analyze:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(78, 205, 196, 0.4);
+    background: #2c5282;
 }
 
 .btn-secondary {
-    background: #f5f5f5;
-    color: #666;
+    background: #edf2f7;
+    color: #2d3748;
 }
 
 .btn-secondary:hover {
@@ -246,27 +230,31 @@ body {
 .status-message {
     text-align: center;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 4px;
     margin-top: 15px;
     min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid;
 }
 
 .status-message.success {
-    background: #d4edda;
-    color: #155724;
+    background: #f0fff4;
+    color: #276749;
+    border-color: #9ae6b4;
 }
 
 .status-message.error {
-    background: #f8d7da;
-    color: #721c24;
+    background: #fff5f5;
+    color: #c53030;
+    border-color: #feb2b2;
 }
 
 .status-message.info {
-    background: #d1ecf1;
-    color: #0c5460;
+    background: #ebf8ff;
+    color: #2c5282;
+    border-color: #90cdf4;
 }
 
 .result-section {
@@ -287,18 +275,17 @@ body {
 
 .result-section h2 {
     text-align: center;
-    color: #667eea;
+    color: #1a365d;
     margin-bottom: 20px;
 }
 
 .profession-card {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    border-radius: 15px;
+    background: #f7fafc;
+    border-radius: 4px;
     padding: 30px;
     text-align: center;
     margin-bottom: 20px;
-    border: 3px solid #667eea;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e2e8f0;
 }
 
 .profession-icon {
@@ -318,7 +305,7 @@ body {
 
 .profession-card h3 {
     font-size: 2em;
-    color: #667eea;
+    color: #1a365d;
     margin-bottom: 15px;
 }
 
@@ -331,9 +318,10 @@ body {
 
 .profession-skills {
     text-align: left;
-    background: rgba(255, 255, 255, 0.7);
+    background: #fff;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
     margin-bottom: 15px;
 }
 
@@ -349,8 +337,8 @@ body {
 
 .profession-skills li {
     padding: 8px 0;
-    color: #555;
-    border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+    color: #4a5568;
+    border-bottom: 1px solid #e2e8f0;
 }
 
 .profession-skills li:last-child {
@@ -359,7 +347,7 @@ body {
 
 .profession-skills li::before {
     content: "✓ ";
-    color: #4ECDC4;
+    color: #2c5282;
     font-weight: bold;
     margin-right: 8px;
 }
@@ -367,29 +355,30 @@ body {
 .match-score {
     font-size: 1.3em;
     font-weight: bold;
-    color: #667eea;
+    color: #2d3748;
     padding: 15px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
 }
 
 .match-score span:last-child {
-    color: #4ECDC4;
+    color: #00b5ad;
     font-size: 1.5em;
 }
 
 .profession-salary {
     margin-top: 15px;
     padding: 12px;
-    background: rgba(102, 126, 234, 0.1);
-    border-radius: 8px;
+    background: #edf2f7;
+    border-radius: 4px;
     font-size: 1.1em;
-    color: #333;
-    border: 2px solid rgba(102, 126, 234, 0.3);
+    color: #2d3748;
+    border: 1px solid #e2e8f0;
 }
 
 .profession-salary strong {
-    color: #667eea;
+    color: #1a365d;
 }
 
 .other-professions {
@@ -397,7 +386,7 @@ body {
 }
 
 .other-professions h4 {
-    color: #667eea;
+    color: #1a365d;
     margin-bottom: 15px;
     text-align: center;
 }
@@ -409,25 +398,22 @@ body {
 }
 
 .profession-mini {
-    background: rgba(102, 126, 234, 0.1);
+    background: #f7fafc;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 4px;
     text-align: center;
-    border: 2px solid rgba(102, 126, 234, 0.3);
-    transition: all 0.3s;
+    border: 2px solid #e2e8f0;
+    transition: all 0.2s;
 }
 
 .profession-mini:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
-    border-color: #667eea;
+    border-color: #cbd5e0;
 }
 
 .profession-mini.selected {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #1a365d;
     color: white;
-    border-color: #667eea;
-    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+    border-color: #1a365d;
 }
 
 .profession-mini.selected .profession-mini-icon,
@@ -443,13 +429,13 @@ body {
 
 .profession-mini-name {
     font-weight: bold;
-    color: #667eea;
+    color: #1a365d;
     margin-bottom: 5px;
 }
 
 .profession-mini-match {
     font-size: 0.9em;
-    color: #4ECDC4;
+    color: #2c5282;
 }
 
 /* Эффект поздравления */
@@ -480,9 +466,9 @@ body {
 .celebration-content {
     text-align: center;
     padding: 50px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 30px;
-    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.5);
+    background: #1a365d;
+    border-radius: 8px;
+    border: 2px solid #2c5282;
     position: relative;
     z-index: 10001;
     animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -627,49 +613,95 @@ body {
     }
 }
 
-#confettiCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+/* Техно-прогресс-бар — бирюзовый акцент */
+.tech-progress-wrap {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: #1a365d;
+    border: 1px solid #00b5ad;
+    border-radius: 4px;
+}
+
+.tech-progress-track {
+    position: relative;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.tech-progress-bar {
     height: 100%;
+    width: 0%;
+    background: #00b5ad;
+    border-radius: 3px;
+    transition: width 0.08s linear;
+    box-shadow: 0 0 10px rgba(0, 181, 173, 0.5);
+}
+
+.tech-progress-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 181, 173, 0.1) 0%, transparent 50%);
     pointer-events: none;
-    z-index: 10000;
+}
+
+.tech-progress-scan {
+    position: absolute;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: techScan 1.2s ease-in-out infinite;
+}
+
+@keyframes techScan {
+    0% { left: -60px; } 100% { left: 100%; }
+}
+
+.tech-progress-label {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: monospace;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #00b5ad;
 }
 
 .info-section {
     margin-top: 40px;
     padding: 20px;
-    background: #f9f9f9;
-    border-radius: 10px;
+    background: #f7fafc;
+    border-radius: 4px;
     text-align: center;
+    border: 1px solid #e2e8f0;
 }
 
 .info-section h3 {
-    color: #667eea;
+    color: #1a365d;
     margin-bottom: 10px;
 }
 
 .info-section p {
-    color: #666;
+    color: #4a5568;
     line-height: 1.6;
     margin-bottom: 15px;
 }
 
 .back-link {
-    color: #667eea;
+    color: #2c5282;
     text-decoration: none;
     font-weight: 600;
     padding: 10px 20px;
-    background: rgba(102, 126, 234, 0.1);
-    border-radius: 8px;
+    background: #edf2f7;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
     display: inline-block;
-    transition: all 0.3s;
+    transition: all 0.2s;
 }
 
 .back-link:hover {
-    background: rgba(102, 126, 234, 0.2);
-    transform: translateX(-5px);
+    background: #e2e8f0;
 }
 
 /* Стили для секции кафедры */
@@ -678,11 +710,11 @@ body {
 }
 
 .cafedra-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 20px;
+    background: #1a365d;
+    border-radius: 4px;
     padding: 30px;
     color: white;
-    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+    border: 2px solid #2c5282;
 }
 
 .cafedra-card h3 {
@@ -706,25 +738,22 @@ body {
 }
 
 .topic-card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
     padding: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: border-color 0.2s;
 }
 
 .topic-card:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .topic-title {
     font-size: 1.2em;
     font-weight: bold;
     margin-bottom: 8px;
-    color: #ffd700;
+    color: #fff;
 }
 
 .topic-meta {
@@ -795,19 +824,19 @@ body {
 }
 
 .topic-legend-item.topic-legend-lecture .topic-legend-swatch {
-    background: #4ECDC4;
+    background: #00b5ad;
 }
 
 .topic-legend-item.topic-legend-lecture {
-    color: #4ECDC4;
+    color: #00b5ad;
 }
 
 .topic-legend-item.topic-legend-practice .topic-legend-swatch {
-    background: #ffd700;
+    background: #ecc94b;
 }
 
 .topic-legend-item.topic-legend-practice {
-    color: #ffd700;
+    color: #ecc94b;
 }
 
 .topic-load-bar {
@@ -832,11 +861,11 @@ body {
 }
 
 .topic-load-lecture {
-    background: #4ECDC4;
+    background: #00b5ad;
 }
 
 .topic-load-practice {
-    background: #ffd700;
+    background: #ecc94b;
 }
 
 .topic-attest {
@@ -853,7 +882,7 @@ body {
 }
 
 .topic-attest-type {
-    color: #4ECDC4;
+    color: #00b5ad;
 }
 
 .topic-attest-term {
@@ -868,28 +897,28 @@ body {
 
 .profile-badge {
     display: inline-block;
-    background: rgba(255, 215, 0, 0.2);
-    border: 2px solid #ffd700;
-    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
     padding: 15px 25px;
     font-size: 1.1em;
-    color: #ffd700;
+    color: #fff;
     font-weight: 600;
-    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
 }
 
 .cafedra-info {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
     padding: 25px;
     margin-top: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .cafedra-info h4 {
     font-size: 1.5em;
     margin-bottom: 15px;
     text-align: center;
-    color: #ffd700;
+    color: #fff;
 }
 
 .cafedra-benefits {
@@ -913,9 +942,9 @@ body {
     font-size: 1.2em;
     margin-top: 20px;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    border: 2px solid rgba(255, 215, 0, 0.5);
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 768px) {
