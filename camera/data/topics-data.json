@@ -1,12 +1,9 @@
-// Данные о дисциплинах кафедры КБ9
-// Профиль 1: РКБП - Разработка кроссплатформенных бизнес-приложений
-// Профиль 2: ТВП - Технологии виртуальных пространств
-const topicsData = {
-  profiles: {
-    RKBP: {
-      profile: "Разработка кроссплатформенных бизнес-приложений",
-      profileShort: "РКБП",
-      topics: {
+{
+  "profiles": {
+    "RKBP": {
+      "profile": "Разработка кроссплатформенных бизнес-приложений",
+      "profileShort": "РКБП",
+      "topics": {
         "red": [
           {
             "title": "Социальная психология и педагогика",
@@ -15,7 +12,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Безопасность жизнедеятельности",
@@ -24,7 +23,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Иностранный язык",
@@ -33,7 +34,10 @@ const topicsData = {
             "creditUnit": "7 з.е.",
             "lecture": "",
             "practice": "128 часов (64 пары)",
-            "course": ["1", "2"]
+            "course": [
+              "1",
+              "2"
+            ]
           },
           {
             "title": "Философия",
@@ -42,7 +46,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Теория вероятностей и матем. статистика",
@@ -51,7 +57,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Линейная алгебра и аналит. геометрия",
@@ -60,7 +68,9 @@ const topicsData = {
             "creditUnit": "7 з.е.",
             "lecture": "64 часа (32 пары)",
             "practice": "64 часа (32 пары)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Математический анализ",
@@ -69,7 +79,10 @@ const topicsData = {
             "creditUnit": "10 з.е.",
             "lecture": "96 часов (48 пар)",
             "practice": "96 часов (48 пар)",
-            "course": ["1", "2"]
+            "course": [
+              "1",
+              "2"
+            ]
           },
           {
             "title": "Экономическая культура",
@@ -78,7 +91,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Правоведение",
@@ -87,7 +102,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "8 часов (4 пары)",
             "practice": "8 часов (4 пары)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Основы российской государственности",
@@ -96,7 +113,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Физика",
@@ -105,7 +124,9 @@ const topicsData = {
             "creditUnit": "8 з.е.",
             "lecture": "64 часа (32 пары)",
             "practice": "64 часа (32 пары)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Русский язык и культура речи",
@@ -114,7 +135,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "История России",
@@ -123,7 +146,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "64 часа (32 пары)",
             "practice": "64 часа (32 пары)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Физическая культура и спорт",
@@ -132,7 +157,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           }
         ],
         "green": [
@@ -143,7 +170,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Управление ИТ-проектами",
@@ -152,7 +181,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Методы искусственного интеллекта",
@@ -161,7 +192,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Объектно-ориентированное программирование",
@@ -170,7 +203,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Моделирование систем",
@@ -179,7 +214,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Методы и средства проектирования ИСиТ",
@@ -188,7 +225,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Сетевые технологии",
@@ -197,7 +236,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Операционные системы",
@@ -206,7 +247,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Алгоритмы и структуры данных",
@@ -215,7 +258,10 @@ const topicsData = {
             "creditUnit": "5 з.е.",
             "lecture": "48 часов (24 пары)",
             "practice": "32 часа (16 пар)",
-            "course": ["1", "2"]
+            "course": [
+              "1",
+              "2"
+            ]
           },
           {
             "title": "Управление данными",
@@ -224,7 +270,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Теория информации",
@@ -233,7 +281,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Архитектура ИС",
@@ -242,7 +292,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Технологии программирования",
@@ -251,7 +303,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Информатика",
@@ -260,7 +314,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Инфокоммуникационные системы и сети",
@@ -269,7 +325,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           }
         ],
         "blue": [
@@ -280,7 +338,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Разработка веб-приложений",
@@ -289,7 +349,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "48 часов (24 пары)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Разработка мобильных приложений",
@@ -298,7 +360,9 @@ const topicsData = {
             "creditUnit": "5 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "48 часов (24 пары)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Программирование на языке высокого уровня",
@@ -307,7 +371,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Интероперабельность приложений и систем",
@@ -316,7 +382,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "48 часов (24 пары)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Конфигурирование ИС",
@@ -325,7 +393,9 @@ const topicsData = {
             "creditUnit": "7 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Основы разработки кроссплатформенных приложений на языке высокого уровня",
@@ -334,7 +404,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "48 часов (24 пары)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Администрирование баз данных",
@@ -343,7 +415,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Проектирование баз данных",
@@ -352,7 +426,9 @@ const topicsData = {
             "creditUnit": "8 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "64 часа (32 пары)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Проектирование и дизайн кроссплатформенных приложений",
@@ -361,7 +437,9 @@ const topicsData = {
             "creditUnit": "5 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "48 часов (24 пары)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Разработка пользовательского интерфейса кросс-платформенных приложений",
@@ -370,7 +448,9 @@ const topicsData = {
             "creditUnit": "5 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "48 часов (24 пары)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Бэкенд-разработка",
@@ -379,7 +459,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часов (16 пар)",
             "practice": "64 часа (32 пар)",
-            "course": ["2, 3"]
+            "course": [
+              "2, 3"
+            ]
           },
           {
             "title": "Технологии разработки приложений на низкокодовых платформах",
@@ -388,7 +470,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Быстрая разработка бизнес-приложений на платформе 1С:Предприятие",
@@ -397,7 +481,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           }
         ],
         "orange": [
@@ -408,7 +494,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Введение в профессиональную деятельность",
@@ -417,7 +505,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Информационно-аналитические системы",
@@ -426,7 +516,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "48 часов (24 пары)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "ИС управления ресурсами предприятия",
@@ -435,7 +527,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "ИТ инфраструктура предприятия",
@@ -444,7 +538,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Ознакомительная практика",
@@ -453,7 +549,9 @@ const topicsData = {
             "creditUnit": "1 з.е.",
             "lecture": "",
             "practice": "",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Системы электронного документооборота",
@@ -462,7 +560,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Жизненный цикл ИС",
@@ -471,7 +571,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Предметно-ориентированные информационные системы",
@@ -480,7 +582,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Технологии анализа и моделирования бизнес-процессов",
@@ -489,7 +593,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Математическое обеспечение ИС",
@@ -498,7 +604,10 @@ const topicsData = {
             "creditUnit": "7 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "64 часа (32 пары)",
-            "course": ["3", "4"]
+            "course": [
+              "3",
+              "4"
+            ]
           },
           {
             "title": "Информационные системы управления взаимоотношениями с клиентами",
@@ -507,7 +616,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Информационные системы управления ресурсами предприятия",
@@ -516,7 +627,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Управление конфигурацией бизнес-приложений",
@@ -525,15 +638,17 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           }
         ]
       }
     },
-    TVP: {
-      profile: "Технологии виртуальных пространств",
-      profileShort: "ТВП",
-      topics: {
+    "TVP": {
+      "profile": "Технологии виртуальных пространств",
+      "profileShort": "ТВП",
+      "topics": {
         "red": [
           {
             "title": "Социальная психология и педагогика",
@@ -542,7 +657,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Безопасность жизнедеятельности",
@@ -551,7 +668,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Иностранный язык",
@@ -560,7 +679,10 @@ const topicsData = {
             "creditUnit": "7 з.е.",
             "lecture": "",
             "practice": "128 часов (64 пары)",
-            "course": ["1", "2"]
+            "course": [
+              "1",
+              "2"
+            ]
           },
           {
             "title": "Философия",
@@ -569,7 +691,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Теория вероятностей и матем. статистика",
@@ -578,7 +702,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Линейная алгебра и аналит. геометрия",
@@ -587,7 +713,9 @@ const topicsData = {
             "creditUnit": "7 з.е.",
             "lecture": "64 часа (32 пары)",
             "practice": "64 часа (32 пары)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Математический анализ",
@@ -596,7 +724,10 @@ const topicsData = {
             "creditUnit": "10 з.е.",
             "lecture": "96 часов (48 пар)",
             "practice": "96 часов (48 пар)",
-            "course": ["1", "2"]
+            "course": [
+              "1",
+              "2"
+            ]
           },
           {
             "title": "Экономическая культура",
@@ -605,7 +736,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Правоведение",
@@ -614,7 +747,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "8 часов (4 пары)",
             "practice": "8 часов (4 пары)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Основы российской государственности",
@@ -623,7 +758,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Физика",
@@ -632,7 +769,9 @@ const topicsData = {
             "creditUnit": "8 з.е.",
             "lecture": "64 часа (32 пары)",
             "practice": "64 часа (32 пары)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Русский язык и культура речи",
@@ -641,7 +780,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "История России",
@@ -650,7 +791,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "64 часа (32 пары)",
             "practice": "64 часа (32 пары)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Физическая культура и спорт",
@@ -659,7 +802,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           }
         ],
         "green": [
@@ -670,7 +815,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Управление ИТ-проектами",
@@ -679,7 +826,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Модели информационного взаимодействия",
@@ -688,7 +837,9 @@ const topicsData = {
             "creditUnit": "1 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Методы искусственного интеллекта",
@@ -697,7 +848,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Объектно-ориентированное программирование",
@@ -706,7 +859,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Моделирование систем",
@@ -715,7 +870,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Архитектура бизнеса в высокотехнологичных отраслях",
@@ -724,7 +881,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Методы и средства проектирования ИСиТ",
@@ -733,7 +892,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Сетевые технологии",
@@ -742,7 +903,9 @@ const topicsData = {
             "creditUnit": "2 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Инфокоммуникационные системы и сети",
@@ -751,7 +914,9 @@ const topicsData = {
             "creditUnit": "1 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Операционные системы",
@@ -760,7 +925,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Алгоритмы и структуры данных",
@@ -769,7 +936,10 @@ const topicsData = {
             "creditUnit": "5 з.е.",
             "lecture": "48 часов (24 пары)",
             "practice": "32 часа (16 пар)",
-            "course": ["1", "2"]
+            "course": [
+              "1",
+              "2"
+            ]
           },
           {
             "title": "Управление данными",
@@ -778,7 +948,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Теория информации",
@@ -787,7 +959,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Архитектура информационных систем",
@@ -796,7 +970,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "32 часа (16 пар)",
             "practice": "16 часов (8 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Технологии программирования",
@@ -805,7 +981,9 @@ const topicsData = {
             "creditUnit": "4 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Информатика",
@@ -814,7 +992,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           }
         ],
         "blue": [
@@ -825,7 +1005,10 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2", "3"]
+            "course": [
+              "2",
+              "3"
+            ]
           },
           {
             "title": "Средства манипулирования данными",
@@ -834,7 +1017,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Нереляционные системы управления базами данных",
@@ -843,7 +1028,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Методы и средства защиты информации",
@@ -852,7 +1039,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Фронтенд разработка",
@@ -861,7 +1050,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Шаблонизированные решения при построении проектной архитектуры",
@@ -870,7 +1061,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Архитектура графических процессоров",
@@ -879,7 +1072,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Безопасность веб-приложений",
@@ -888,7 +1083,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Компонентно-ориентированное программирование",
@@ -897,7 +1094,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Инструментальные средства оптимизации интернет ресурсов для поисковых систем",
@@ -906,7 +1105,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Интерпритируемый язык программирования высокого уровня",
@@ -915,7 +1116,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           }
         ],
         "orange": [
@@ -926,7 +1129,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Введение в профессиональную деятельность",
@@ -935,7 +1140,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Трехмерное моделирование игровых пространств",
@@ -944,7 +1151,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["2"]
+            "course": [
+              "2"
+            ]
           },
           {
             "title": "Разработка программного аппарата игровых решений",
@@ -953,7 +1162,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Анимационные технологии трехмерного моделирования",
@@ -962,7 +1173,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Сопровождение проектов в игровой индустрии",
@@ -971,7 +1184,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Ознакомительная практика",
@@ -980,7 +1195,9 @@ const topicsData = {
             "creditUnit": "1 з.е.",
             "lecture": "",
             "practice": "",
-            "course": ["1"]
+            "course": [
+              "1"
+            ]
           },
           {
             "title": "Разработка игровых решений с использованием современных технологий",
@@ -989,7 +1206,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Разработка мобильных приложений",
@@ -998,7 +1217,10 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3", "4"]
+            "course": [
+              "3",
+              "4"
+            ]
           },
           {
             "title": "Разработка мультиплеера для игровых приложений",
@@ -1007,7 +1229,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           },
           {
             "title": "Алгоритмические основы разработки симуляторов",
@@ -1016,7 +1240,9 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["3"]
+            "course": [
+              "3"
+            ]
           },
           {
             "title": "Технологии повышения эффективности разработки игровых решений",
@@ -1025,10 +1251,12 @@ const topicsData = {
             "creditUnit": "3 з.е.",
             "lecture": "16 часов (8 пар)",
             "practice": "32 часа (16 пар)",
-            "course": ["4"]
+            "course": [
+              "4"
+            ]
           }
         ]
       }
     }
   }
-};
+}
