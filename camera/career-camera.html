@@ -18,12 +18,23 @@
     </header>
 
     <div class="camera-section">
+      <p id="status" class="status-message info" role="status">Нажмите «Включить камеру», чтобы начать.</p>
       <div class="camera-container">
         <video id="video" autoplay playsinline></video>
+        <div id="focusFrame" class="focus-frame is-hidden" aria-hidden="true">
+          <span class="focus-frame__pulse" aria-hidden="true"></span>
+          <span class="focus-frame__shine" aria-hidden="true"></span>
+          <span class="focus-frame__corner focus-frame__corner--tl" aria-hidden="true"></span>
+          <span class="focus-frame__corner focus-frame__corner--tr" aria-hidden="true"></span>
+          <span class="focus-frame__corner focus-frame__corner--bl" aria-hidden="true"></span>
+          <span class="focus-frame__corner focus-frame__corner--br" aria-hidden="true"></span>
+        </div>
         <canvas id="captureCanvas"></canvas>
         <canvas id="contourCanvas" class="contour-overlay"></canvas>
         <div id="overlay" class="overlay">
-          <div id="scanLine" class="scan-line is-hidden"></div>
+          <div id="scanLineRegion" class="scan-line-region is-hidden">
+            <div id="scanLine" class="scan-line"></div>
+          </div>
         </div>
       </div>
 
@@ -96,8 +107,8 @@
 
   <script src="js/career-camera.ui.js"></script>
   <script src="js/career-camera.data.js"></script>
-  <script src="js/career-camera.scan.js"></script>
   <script src="js/career-camera.analysis.js"></script>
+  <script src="js/career-camera.scan.js"></script>
   <script src="js/career-camera.topics.js"></script>
   <script src="js/career-camera.app.js"></script>
 </body>
